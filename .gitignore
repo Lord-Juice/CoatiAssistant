@@ -205,4 +205,6 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
-services/discord_connector/self_bot/config/config.json
+
+# Config files with secrets
+services/self_bot/config/config.json
