@@ -57,6 +57,12 @@ async def forward_if_enabled(message):
     target_id = config.get("forward", {}).get("target")
     if not target_id:
         return
+
+    is_dm = isinstance(message.channel, discord.DMChannel)
+    mentioned_bot = bot.user in message.mentions if message.mentions else False
+    if not is_dm and not mentioned_bot:
+        return
+
     # if str(message.author.id) == str(target_id):
     #     return
     try:
@@ -64,11 +70,10 @@ async def forward_if_enabled(message):
     except Exception:
         return
 
-    is_dm = isinstance(message.channel, discord.DMChannel)
     channel_part = "DM" if is_dm else f"#{getattr(message.channel, 'name', 'unknown')}"
     guild_part = "(DM)" if is_dm else f"auf dem Server *{getattr(message.guild, 'name', 'Unbekannt')}*"
 
-    header = f"<@{message.author.id}> hat in {channel_part} {guild_part} folgendes geschrieben:"
+    header = f"<@{message.author.id}>\n{channel_part}\n{guild_part}\n"
     body = message.content if message.content else "*Nachricht leer*"
 
     attachment_lines = []
