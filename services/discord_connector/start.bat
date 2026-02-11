@@ -1,5 +1,5 @@
 @echo off
-REM Start the self_bot
+REM Start the discord_connector bot
 if not exist venv (
     echo Error: Virtual environment not found. Please run setup.bat first.
     pause
@@ -7,5 +7,5 @@ if not exist venv (
 )
 
 call venv\Scripts\activate.bat
-python main.py
+python app\bot.py
 pause
