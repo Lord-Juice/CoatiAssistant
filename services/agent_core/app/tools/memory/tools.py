@@ -36,6 +36,17 @@ def remember(payload: Dict[str, Any]) -> Dict[str, Any]:
 # ---- Tool: recall ----
 @tool
 def recall(payload: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Retrieves a stored memory fact for an entity.
+
+    Expected payload:
+    {
+      "entity": "wallet",
+      "slot": "location.current"
+    }
+
+    Returns the current value and optionally location candidates for the entity.
+    """
     entity = payload["entity"]
     slot = payload.get("slot", "note.current")
 
