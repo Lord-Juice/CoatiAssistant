@@ -215,3 +215,15 @@ class MemoryStore:
         if best_score >= 0.34:
             return best_key
         return None
+    
+def read_fact_with_history(self, entity_raw: str, slot: str):
+    value, meta = self.read_fact(entity_raw=entity_raw, slot=slot)
+    if meta.get("status") != "ok":
+        return None, [], meta
+
+    key = meta["key"]
+    obj = self._db[key]
+    group, leaf = self._split_slot(slot)
+    group_val = obj.get("facts", {}).get(group, {})
+    history = group_val.get("history", []) if isinstance(group_val, dict) else []
+    return value, history, meta
