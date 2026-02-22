@@ -1,0 +1,5 @@
+# Agent Core (CLI) - minimal deps
+langchain
+langchain-ollama
+python-dotenv
+rich
