@@ -31,7 +31,6 @@ TOOLS = [
     generate_uuid,
     remember,
     recall,
-    clear_memory,
     get_system_info,
     read_text_file,
     get_today_range,
